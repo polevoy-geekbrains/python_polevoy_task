@@ -12,7 +12,6 @@ def enter_dey_of_week():
         print('День недели должен быть от 1 до 7. Попробуйте еще раз')
         return enter_dey_of_week()
     return dey_of_week
-#print('Введите день недели числом от 1 до 7  ')
 dey_of_week = enter_dey_of_week()
 if(5<dey_of_week<8):
     print(f'{dey_of_week} -> выходной день')
