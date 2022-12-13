@@ -147,7 +147,7 @@ def game_play_smart_bot(name1, name2, lot_candy, taken_candies, count):
     name = name1
     count += 1
     if name == 'Умный Бот':
-        temp = lot_candy % taken_candies + 1
+        temp = lot_candy % (taken_candies + 1)
         print(f'{name} взял из кучи {temp} конфет(ы)')
     else:    
         temp = input(f'{name} в куче {lot_candy} конфет. Сколько из них Вы возьмете?  ')
