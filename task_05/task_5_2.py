@@ -79,7 +79,8 @@ def start_game():
     elif num == '2':
         game_play_bot(name1, name2, lot_candy, taken_candies)
     else:
-        game_play_smart_bot(name1, name2, lot_candy, taken_candies, 0, taken_candies)
+        count = 0
+        game_play_smart_bot(name1, name2, lot_candy, taken_candies, count)
 
 def game_play_human(name1, name2, lot_candy, taken_candies):
     ''' Игра с другим игроком '''
@@ -140,38 +141,38 @@ def game_play_bot(name1, name2, lot_candy, taken_candies):
         name2 = name
         return game_play_bot(name1, name2, lot_candy, taken_candies)
 
-def game_play_smart_bot(name1, name2, lot_candy, taken_candies, count, game_move):
+def game_play_smart_bot(name1, name2, lot_candy, taken_candies, count):
     ''' Игра с умным ботом '''
 
     name = name1
     count += 1
-    if name == 'Умный Бот': # Все еще тупой бот
-        temp = random.randint(1, taken_candies)
+    if name == 'Умный Бот':
+        temp = lot_candy % taken_candies + 1
         print(f'{name} взял из кучи {temp} конфет(ы)')
     else:    
         temp = input(f'{name} в куче {lot_candy} конфет. Сколько из них Вы возьмете?  ')
         if (not temp.isdigit()):
             print ('Вы ввели что-то не то. Попробуйте еще раз')
-            return game_play_smart_bot(name1, name2, lot_candy, taken_candies, count, game_move)
+            return game_play_smart_bot(name1, name2, lot_candy, taken_candies, count)
         temp = int(temp)
         if temp == 0:
             print ('Вы должны взять хотя бы одну конфету. Попробуйте еще раз')
-            return game_play_smart_bot(name1, name2, lot_candy, taken_candies, count, game_move)
+            return game_play_smart_bot(name1, name2, lot_candy, taken_candies, count)
         elif temp > taken_candies:
             print (f'Вы не можете брать больше конфет чем: {taken_candies}. Попробуйте еще раз')
-            return game_play_smart_bot(name1, name2, lot_candy, taken_candies, count, game_move)
+            return game_play_smart_bot(name1, name2, lot_candy, taken_candies, count)
         elif temp > lot_candy:
             print (f'Вы не можете брать больше конфет чем осталось в куче, а в ней всего {lot_candy} конфет. Попробуйте еще раз')
-            return game_play_smart_bot(name1, name2, lot_candy, taken_candies, count, game_move)
+            return game_play_smart_bot(name1, name2, lot_candy, taken_candies, count)
+    
     lot_candy = lot_candy - temp
-    game_move = temp
     if lot_candy == 0:
         print(f'Поздравляю! {name} - забирает всю кучу конфет')
         sys.exit()
     else:
         name1 = name2
         name2 = name
-        return game_play_smart_bot(name1, name2, lot_candy, taken_candies, game_move)
+        return game_play_smart_bot(name1, name2, lot_candy, taken_candies, count)
 
 print("*" * 10, " Игра забери всю кучу конфет для двух игроков, или для игрока и бота ", "*" * 10)
 start_game()
