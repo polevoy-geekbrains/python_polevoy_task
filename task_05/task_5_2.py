@@ -56,17 +56,18 @@ def start_game():
     if (not lot_candy.isdigit()):
         print ('Вы ввели что-то не то. Попробуйте еще раз')
         return start_game()
-    lot_candy = int(lot_candy)
-    if lot_candy < 10:
+    if int(lot_candy) < 10:
         print('Забыл предупредить, меньше 10 конфет это уже не куча, у Вас теперь куча из 2021 конфеты')
-        lot_candy = 2021
+        lot_candy = int(2021)
+    else:
+        lot_candy = int(lot_candy)
     taken_candies = input('Из кучи нельзя брать за раз больше трети первоначального количества. Сколько берем?     ')
     if (not taken_candies.isdigit()):
         print ('Вы ввели что-то не то. Попробуйте еще раз')
         return start_game()
     elif taken_candies == '0':
         print('Похоже Вы слишком хитрый, тогда будете брать из кучи по одной конфете')
-        lot_candy = 1
+        taken_candies = int(1)
     elif int(taken_candies) > lot_candy // 3:
         print (f'{name1} не знает, что такое треть. Приглашаю в игру нового игрока')
         return start_game()
@@ -174,5 +175,5 @@ def game_play_smart_bot(name1, name2, lot_candy, taken_candies, count):
         name2 = name
         return game_play_smart_bot(name1, name2, lot_candy, taken_candies, count)
 
-print("*" * 10, " Игра забери всю кучу конфет для двух игроков, или для игрока и бота ", "*" * 10)
+print("*" * 10, '  Игра "Последняя конфета!" Для двух игроков, или для игрока и бота ', "*" * 10)
 start_game()
